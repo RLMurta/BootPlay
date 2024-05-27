@@ -27,7 +27,7 @@ export function Signup() {
         toast.dismiss(toastId);
         toast.success("Conta criada com sucesso!");
         setLoading(false);
-        _navigate('/landing');
+        _navigate('/login');
       }).catch(() => {
         toast.dismiss(toastId);
         setLoading(false);
