@@ -21,7 +21,7 @@ services:
       - backend
   bootcamp_user_api:
     build:
-      context: ../rafael-murta-backend/app-user-api
+      context: ../backend/app-user-api
       dockerfile: ../app-user-api/Dockerfile
     image: murtarl/app-user-api:latest
     ports:
@@ -38,7 +38,7 @@ services:
       - backend
   bootcamp_integration_api:
     build:
-      context: ../rafael-murta-backend/app-integration-api
+      context: ../backend/app-integration-api
       dockerfile: ../app-integration-api/Dockerfile
     image: murtarl/app-integration-api:latest
     ports:
