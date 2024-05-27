@@ -29,7 +29,7 @@ public class WalletController {
     // GET --> Get wallet
     @Operation(summary = "My wallet")
     @GetMapping
-    public ResponseEntity<Wallet> getWallet(String email) {
+    public ResponseEntity<Wallet> getWallet(@RequestParam("email") String email) {
         return ResponseEntity.ok(this.walletService.getWallet(email));
     }
 }
