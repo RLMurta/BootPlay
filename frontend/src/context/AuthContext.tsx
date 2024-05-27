@@ -1,4 +1,5 @@
 import { AlbumModel } from "@/models/AlbumModel";
+import { CreditModel } from "@/models/CreditModel";
 import { UserAlbumModel } from "@/models/UserAlbumModel";
 import { UserModel } from "@/models/UserModel";
 import { WalletModel } from "@/models/WalletModel";
@@ -15,6 +16,7 @@ interface AuthContextModel extends UserModel {
   getAlbums: (search: string) => Promise<AlbumModel[]>;
   buyAlbum: (name: string, idSpotify: string, artistName: string, imageUrl: string, value: number) => Promise<AlbumModel | void>;
   getWallet: (email: string) => Promise<WalletModel>;
+  creditWallet: (email: string, value: number) => Promise<CreditModel>;
 }
 
 export const AuthContext = createContext({} as AuthContextModel);
@@ -112,10 +114,20 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
     return resp.data;
   }, []);
 
+  const CreditWallet = useCallback(async (email: string, value: number) => {
+    const resp = await wallet_api.post(`/wallet/credit/{value}?email=${email}&value=${value}`);
+
+    if(resp instanceof Error) {
+      return resp.message;
+    }
+
+    return resp.data;
+  }, []);
+
   return (
     <AuthContext.Provider value={
         { isAuthenticated: isAuthenticated, ...userData, login: Login, logout: Logout, signup: Signup, 
-        getUserAlbums: GetUserAlbums, getAlbums: GetAlbums, buyAlbum: BuyAlbum, getWallet: GetWallet}}>
+        getUserAlbums: GetUserAlbums, getAlbums: GetAlbums, buyAlbum: BuyAlbum, getWallet: GetWallet, creditWallet: CreditWallet}}>
       {children}
     </AuthContext.Provider>
   );
