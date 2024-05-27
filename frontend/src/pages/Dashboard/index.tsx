@@ -116,9 +116,9 @@ export function Dashboard() {
                         <Button onClick={() => _navigate('/user_dashboard')} className="hover:text-gray-400 text-white text-2xl text-md md:hidden">
                             <FontAwesomeIcon icon={faCompactDisc} />
                         </Button>
-                        <Button className="hover:text-gray-400 text-white text-md hidden md:block">
+                        <Button onClick={() => _navigate('/wallet')} className="hover:text-gray-400 text-white text-md hidden md:block">
                             Carteira</Button>
-                        <Button className="hover:text-gray-400 text-white text-2xl mr-1 text-md md:hidden">
+                        <Button onClick={() => _navigate('/wallet')} className="hover:text-gray-400 text-white text-2xl mr-1 text-md md:hidden">
                             <FontAwesomeIcon icon={faWallet} />
                         </Button>
                         <img src={avatar} className='h-12 rounded-full' alt="Avatar" />
@@ -135,12 +135,12 @@ export function Dashboard() {
 
             <main className="flex flex-col bg-gray-900 h-full z-0">
                 <div className='flex flex-row mr-2 ml-2 items-center justify-center'>
-                    <SearchInput onChange={handleOnSearchChange} onSearchIconClick={handleOnSearchBtClicked} placeholder="Pesquisar"  
-                    className="w-96 h-12 p-2 border border-white bg-transparent rounded-md text-white" onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleOnSearchBtClicked();
-                        }
-                    }} />
+                    <SearchInput onChange={handleOnSearchChange} onSearchIconClick={handleOnSearchBtClicked} placeholder="Pesquisar"
+                        className="w-96 h-12 p-2 border border-white bg-transparent rounded-md text-white" onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                handleOnSearchBtClicked();
+                            }
+                        }} />
                 </div>
                 <div className='relative flex flex-col items-center mb-12'>
                     {loading ? <><Loader2 className="h-24 w-24 mt-20 bg-gray-900 text-white animate-spin" /> <h1 className='text-white'>Carregando...</h1> </> :

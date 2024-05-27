@@ -11,6 +11,7 @@ import { PrivateRoutes } from './utils/PrivateRoutes';
 import { Error } from './pages/Error';
 import { Dashboard } from './pages/Dashboard';
 import { UserDashboard } from './pages/UserDashboard';
+import { Wallet } from './pages/Wallet';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.Fragment>
@@ -26,6 +27,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </Route>
           <Route path='/user_dashboard' element={< PrivateRoutes />}>
             <Route path='/user_dashboard' element={< UserDashboard />} />
+          </Route>
+          <Route path='/wallet' element={< PrivateRoutes />}>
+            <Route path='/wallet' element={< Wallet />} />
           </Route>
           <Route path='*' element={<Error />} />
         </Routes>

@@ -1,7 +1,8 @@
 import { AlbumModel } from "@/models/AlbumModel";
 import { UserAlbumModel } from "@/models/UserAlbumModel";
 import { UserModel } from "@/models/UserModel";
-import { album_api, user_api } from "@/services/apiService";
+import { WalletModel } from "@/models/WalletModel";
+import { album_api, user_api, wallet_api } from "@/services/apiService";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -13,6 +14,7 @@ interface AuthContextModel extends UserModel {
   getUserAlbums: () => Promise<UserAlbumModel[]>;
   getAlbums: (search: string) => Promise<AlbumModel[]>;
   buyAlbum: (name: string, idSpotify: string, artistName: string, imageUrl: string, value: number) => Promise<AlbumModel | void>;
+  getWallet: (email: string) => Promise<WalletModel>;
 }
 
 export const AuthContext = createContext({} as AuthContextModel);
@@ -43,6 +45,7 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
  
     user_api.defaults.headers.common.Authorization = `Basic ${respAuth.data.token}`;
     album_api.defaults.headers.common.Authorization = `Basic ${respAuth.data.token}`;
+    wallet_api.defaults.headers.common.Authorization = `Basic ${respAuth.data.token}`;
     const respUserInfo = await user_api.get(`/users/${respAuth.data.id}`);
 
     if(respUserInfo instanceof Error) {
@@ -99,10 +102,20 @@ export const AuthProvider: React.FC<Props> = ({children}) => {
     return resp.data;
   }, []);
 
+  const GetWallet = useCallback(async (email: string) => {
+    const resp = await wallet_api.get(`/wallet?email=${email}`);
+
+    if(resp instanceof Error) {
+      return resp.message;
+    }
+
+    return resp.data;
+  }, []);
+
   return (
     <AuthContext.Provider value={
         { isAuthenticated: isAuthenticated, ...userData, login: Login, logout: Logout, signup: Signup, 
-        getUserAlbums: GetUserAlbums, getAlbums: GetAlbums, buyAlbum: BuyAlbum}}>
+        getUserAlbums: GetUserAlbums, getAlbums: GetAlbums, buyAlbum: BuyAlbum, getWallet: GetWallet}}>
       {children}
     </AuthContext.Provider>
   );

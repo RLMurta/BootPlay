@@ -41,9 +41,9 @@ export function UserDashboard() {
                     <Button className="text-white font-bold text-md md:hidden" disabled>
                         <FontAwesomeIcon icon={faCompactDisc} />
                     </Button>
-                    <Button className="hover:text-gray-400 text-white text-md hidden md:block">
+                    <Button onClick={() => _navigate('/wallet')} className="hover:text-gray-400 text-white text-md hidden md:block">
                         Carteira</Button>
-                    <Button className="hover:text-gray-400 text-white mr-1 text-md md:hidden">
+                    <Button onClick={() => _navigate('/wallet')} className="hover:text-gray-400 text-white mr-1 text-md md:hidden">
                         <FontAwesomeIcon icon={faWallet} />
                     </Button>
                     <img src={avatar} className='h-12 rounded-full' alt="Avatar" />
