@@ -27,6 +27,16 @@ containers do projeto.
 
 Caso haja erro, dê clean e install no life cycle do projeto e tente novamente.
 
+## Importante
+Na primeira vez que for rodar a aplicação backend, será necessário alterar as credenciais spotify localizadas no arquivo `backend/app-integration-api/src/main/java/br/com/sysmap/bootcamp/domain/service/integration/SpotifyApi.java` onde o código 
+`private se.michaelthelin.spotify.SpotifyApi 
+            spotifyApi = new se.michaelthelin.spotify.SpotifyApi
+            .Builder()
+            .setClientId("INSERT_YOUR_CLIENT_ID")
+            .setClientSecret("INSERT_YOUR_CLIENT_SECRET")
+            .build();`
+está localizado. Para conseguir essas credenciais, acesse o site https://developer.spotify.com/documentation/web-api crie uma conta, acesse o dashboard e crie um projeto que deve ter a permissão WebApi. Ainda dentro do dashboard você conseguirá pegar o seu client id e seu client secret, substitua eles no código acima.
+
 ## Documentação
 Após o projeto ser executado, é possível acessar a documentação da API através
 de um navegador.
